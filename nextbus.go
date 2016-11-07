@@ -6,12 +6,12 @@ import (
 )
 
 // Stop combines a route and stop tag for input to GetPredictionsMulti.
-type Stop struct {
+type PredictionStop struct {
 	Route string
 	Stop  string
 }
 
-func (s Stop) format() string {
+func (s PredictionStop) format() string {
 	return s.Route + "|" + s.Stop
 }
 
@@ -76,7 +76,7 @@ func getPredictions(args args) (Predictions, error) {
 }
 
 // GetPredictionsMulti returns predicted arrival times for multiple stops.
-func GetPredictionsMulti(agency string, stops []Stop) ([]Predictions, error) {
+func GetPredictionsMulti(agency string, stops []PredictionStop) ([]Predictions, error) {
 	a := args{{"a", agency}}
 	for _, stop := range stops {
 		a.add("stops", stop.format())
